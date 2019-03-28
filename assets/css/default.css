@@ -1,3 +1,7 @@
+#body {
+  margin-top: 75px !important;
+}
+
 .card {
   margin-top: 10px !important;
 }
@@ -13,19 +17,15 @@
 .card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.5s;
+  /* cursor: pointer; */
 }
 
 .card:hover {
   box-shadow: 8px 16px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-title {
-  position: relative !important;
-}
-
-.cost {
-  position: absolute !important;
-  right: 0;
+.cost-cont {
+  text-align: right;
 }
 
 .card-title .title:hover {

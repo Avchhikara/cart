@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#">Shopping Corner</a>
       <button
         class="navbar-toggler"
@@ -53,9 +53,10 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cart.html"
-              >Cart <i class="fas fa-shopping-cart"></i
-            ></a>
+            <a class="nav-link" href="#!"
+              >Cart <i class="fas fa-shopping-cart"></i> -
+              <span class="badge bagde-danger" id="cart-count">0</span></a
+            >
           </li>
         </ul>
       </div>
@@ -63,34 +64,7 @@
 
     <div class="container">
       <div class="row" id="body">
-        <div class="col-sm-12 col-lg-6 col-xl-4">
-          <div class="card">
-            <img src="./assets/img/macbook-air.jpg" alt="Macbook Air" />
-            <div class="card-body">
-              <h4 class="card-title">
-                <span class="title">Macbook Air</span>
-                <span class="cost"
-                  ><span class=" h5 red-text mr-auto">₹70,000</span>
-                  <s class="small-text">₹85,000</s></span
-                >
-              </h4>
-              <div class="text-muted">Get it by <em>tomorrow</em></div>
-              <div class="text-muted">
-                FREE delivery by <em>Shopping Corner</em>
-              </div>
-            </div>
-            <div class=" card-footer">
-              <div class="row">
-                <a href="#!" class="btn btn-secondary  col-5"
-                  >Add to Cart &nbsp; &nbsp;<i class="fas fa-shopping-cart"></i>
-                </a>
-                <a href="#!" class="btn btn-primary  offset-2 col-5">
-                  Buy Now &nbsp; &nbsp;<i class="fas fa-bolt"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- This will be automatically filled in by JS -->
       </div>
     </div>
 
