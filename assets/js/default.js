@@ -124,12 +124,12 @@ function showProducts(first = true) {
           </div>
           <div class=" card-footer">
             <div class="row">
-              <a href="#!" class="btn btn-secondary  col-5 add-cart" data-id=${i}
+              <button href="#!" class="btn btn-secondary  col-5 add-cart" data-id=${i}
                 >Add to Cart &nbsp; &nbsp;<i class="fas fa-shopping-cart"></i>
-              </a>
-              <a href="#!" class="btn btn-primary  offset-2 col-5">
+              </button>
+              <button href="#!" class="btn btn-primary  offset-2 col-5">
                 Buy Now &nbsp; &nbsp;<i class="fas fa-bolt"></i
-              ></a>
+              ></button>
             </div>
           </div>
         </div>
@@ -159,9 +159,7 @@ function showProducts(first = true) {
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary add-cart" data-id=${i}  >Add to Cart &nbsp; &nbsp;<i class="fas fa-shopping-cart"></i></button>
-        <button type="button" class="btn btn-primary">Buy Now &nbsp; &nbsp;<i class="fas fa-bolt"></i
-        ></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -187,15 +185,63 @@ function AddCartListener() {
 }
 
 function addToCart(e) {
-  let id = "";
+  let id = "",
+    btn = "";
   if (e.target.className.includes("btn")) {
+    btn = e.target;
     id = e.target.getAttribute("data-id");
   } else {
     id = e.target.parentElement.getAttribute("data-id");
+    btn = e.target.parentElement;
   }
   //Now, just adding corresponding item to cart
-  cart.push(data[id]);
-  data[id].cart = true;
-  //   console.log(data[id]);
-  showProducts(false);
+  btn.textContent = "Adding...";
+  btn.disabled = true;
+  setTimeout(() => {
+    if (!cart.includes(data[id])) {
+      cart.push(data[id]);
+    }
+    data[id].cart = true;
+    showProducts(false);
+  }, 1000);
+}
+
+//Adding events handler to cart
+
+const cartNav = document.querySelector("#cartNav");
+cartNav.addEventListener("click", setCartValues);
+
+function setCartValues(e) {
+  const cartBody = document.querySelector("#cart-body");
+  if (cart.length <= 0) {
+    cartBody.innerHTML = `<li class="list-group-item">No items in Cart now</li>`;
+  } else {
+    cartBody.innerHTML = "";
+    for (let i of cart) {
+      cartBody.innerHTML += `<li class="list-group-item cart-item">
+            <span href="#!" data-toggle='modal' data-target='#card${Object.values(
+              data
+            ).indexOf(i)}' class="red-text-hover">${i.title}</span>
+            <span class="ml-auto" ><a class="close" data-title='${
+              i.title
+            }'>&times;</a></span>
+        
+        </li>`;
+    }
+    // console.log(Object.values(data));
+    deleteCartItem();
+  }
+}
+
+function deleteCartItem() {
+  const cartItem = document.querySelectorAll(".cart-item");
+  for (let i of cartItem) {
+    i.addEventListener("click", deleteCard);
+  }
+}
+
+function deleteCard(e) {
+  const close = e.target;
+  const title = close.getAttribute("data-title");
+  console.log(title);
 }
