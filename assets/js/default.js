@@ -269,12 +269,13 @@ function deleteCard(e) {
     //Now, deleting the entry in the cart
     cart = cart.filter((item, index) => {
       if (item.title === title) {
-        i = index;
+        i = Object.values(data).indexOf(item);
       }
       return item.title !== title;
     });
-    data[i].cart = false;
 
+    data[i].cart = false;
+    // console.log(cart, data, i);
     //Now, re-rendering everything
     setCartValues();
     showCartCount();
