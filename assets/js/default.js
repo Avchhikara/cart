@@ -79,7 +79,7 @@ const data = {
   }
 };
 
-const cart = [];
+let cart = [];
 
 const body = document.querySelector("#body");
 const cartCount = document.querySelector("#cart-count");
@@ -127,7 +127,7 @@ function showProducts(first = true) {
               <button href="#!" class="btn btn-secondary  col-5 add-cart" data-id=${i}
                 >Add to Cart &nbsp; &nbsp;<i class="fas fa-shopping-cart"></i>
               </button>
-              <button href="#!" class="btn btn-primary  offset-2 col-5">
+              <button href="#!" class="btn btn-primary  offset-2 col-5" data-toggle="modal" data-target="#buy-now">
                 Buy Now &nbsp; &nbsp;<i class="fas fa-bolt"></i
               ></button>
             </div>
@@ -163,6 +163,27 @@ function showProducts(first = true) {
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="buy-now" tabindex="-1" role="dialog" aria-labelledby='buy-now' aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Buy Now - ${
+        product.title
+      }</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This will be the buy now modal, where we will ask for clients required info for delivery and taking the charges etc.
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
 </div>
 
         `;
@@ -243,5 +264,20 @@ function deleteCartItem() {
 function deleteCard(e) {
   const close = e.target;
   const title = close.getAttribute("data-title");
-  console.log(title);
+  let i = -1;
+  if (title) {
+    //Now, deleting the entry in the cart
+    cart = cart.filter((item, index) => {
+      if (item.title === title) {
+        i = index;
+      }
+      return item.title !== title;
+    });
+    data[i].cart = false;
+
+    //Now, re-rendering everything
+    setCartValues();
+    showCartCount();
+    showProducts(false);
+  }
 }
